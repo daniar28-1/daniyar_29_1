@@ -39,3 +39,11 @@ def category_list_view(request):
             'categories': categories
         }
         return render(request, 'products/categories.html', context=context)
+
+def products_detail_view(request, id):
+    if request.method == 'GET':
+        product = Product.objects.get(id=id)
+        context = {
+            'product': product
+        }
+        return render(request, 'products/detail.html', context=context)
