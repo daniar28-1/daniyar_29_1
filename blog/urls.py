@@ -24,5 +24,6 @@ urlpatterns = [
     path('datetime/', views.now_date),
     path('goodby/', views.goodby),
     path('', views.main_view),
-    path('products/', views.products)
+    path('products/', views.products),
+    path('categories', views.category_list_view)
 ]
