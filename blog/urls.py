@@ -28,5 +28,7 @@ urlpatterns = [
     path('', views.main_view),
     path('products/', views.products),
     path('categories', views.category_list_view),
-    path('products/<int:id>/', views.products_detail_view)
+    path('products/<int:id>/', views.products_detail_view),
+    path('products/create/', views.product_create_view),
+    path('categories/create/', views.category_create_view)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

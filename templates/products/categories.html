@@ -6,5 +6,9 @@
             <h5 {{ category.title }}></h5>
         {% endfor %}
     </div>
-
+    <form action="/categories/create/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
 {% endblock %}

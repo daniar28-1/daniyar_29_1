@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from datetime import time
 
+from products.forms import ProductCreateForm, CategoryCreateForm
 from products.models import Product, Category
 
 
@@ -47,3 +48,55 @@ def products_detail_view(request, id):
             'product': product
         }
         return render(request, 'products/detail.html', context=context)
+
+
+def product_create_view(request):
+    if request.method == 'GET':
+        context = {
+            'form': ProductCreateForm()
+        }
+        return render(request, 'products/create.html', context=context)
+
+    if request.method == 'POST':
+        data = request.POST
+        file = request.FILES
+
+        form = ProductCreateForm(data, file)
+
+        if form.is_valid():
+            Product.objects.create(
+                image=form.cleaned_data.get('image'),
+                name=form.cleaned_data.get('name'),
+                quantity=form.cleaned_data.get('quantity'),
+                description=form.cleaned_data.get('description')
+            )
+
+            return redirect('/products/')
+
+        return render(request, 'products/create.html', context={
+            'form': form
+        })
+
+
+def category_create_view(request):
+    if request.method == 'GET':
+        context = {
+            'form': CategoryCreateForm()
+        }
+        return render(request, 'products/categories.html', context=context)
+
+    if request.method == 'POST':
+        data = request.POST
+
+        form = CategoryCreateForm(data)
+
+        if form.is_valid():
+            Category.objects.create(
+                title=form.cleaned_data.get('title')
+            )
+
+            return redirect('/categories/')
+
+        return render(request, 'products/categories.html', context={
+            'form': form
+        })
