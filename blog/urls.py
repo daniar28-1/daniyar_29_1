@@ -22,5 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.helloview),
     path('datetime/', views.now_date),
-    path('goodby/', views.goodby)
+    path('goodby/', views.goodby),
+    path('', views.main_view),
+    path('products/', views.products)
 ]
